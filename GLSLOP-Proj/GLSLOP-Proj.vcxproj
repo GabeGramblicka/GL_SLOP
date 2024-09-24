@@ -107,6 +107,9 @@
     <CustomBuildStep>
       <Command>xcopy "$(ProjectDir)lib\SDL2.dll" "$(OutDir)" /s /r /y /q</Command>
     </CustomBuildStep>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)inc\SDL2.dll" "$(OutDir)" /s /r /y /q</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -129,6 +132,9 @@
     <CustomBuildStep>
       <Command>xcopy "$(ProjectDir)lib\SDL2.dll" "$(OutDir)" /s /r /y /q</Command>
     </CustomBuildStep>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)inc\SDL2.dll" "$(OutDir)" /s /r /y /q</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -147,6 +153,9 @@
     <CustomBuildStep>
       <Command>xcopy "$(ProjectDir)lib\SDL2.dll" "$(OutDir)" /s /r /y /q</Command>
     </CustomBuildStep>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)inc\SDL2.dll" "$(OutDir)" /s /r /y /q</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -169,6 +178,9 @@
     <CustomBuildStep>
       <Command>xcopy "$(ProjectDir)lib\SDL2.dll" "$(OutDir)" /s /r /y /q</Command>
     </CustomBuildStep>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)inc\SDL2.dll" "$(OutDir)" /s /r /y /q</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
