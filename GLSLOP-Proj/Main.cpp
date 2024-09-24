@@ -10,6 +10,8 @@
 #define SDL_MAIN_HANDLED
 #include <SDL2\SDL.h>
 #include <SDL2\SDL_main.h>
+#include <GL\glew.h> // Must come before GL.h
+#include <GL\GL.h>
 
 #include <math.h>
 
@@ -41,10 +43,6 @@
 // Public Functions:
 //------------------------------------------------------------------------------
 
-//------------------------------------------------------------------------------
-// Private Functions:
-//------------------------------------------------------------------------------
-
 int main(int argc, char* argv[]) {
 	SDL_Init(SDL_INIT_VIDEO);
 	SDL_Window* window = SDL_CreateWindow("GLSLOP", SDL_WINDOWPOS_UNDEFINED,
@@ -73,4 +71,6 @@ int main(int argc, char* argv[]) {
 	return 0;
 }
 
-
+//------------------------------------------------------------------------------
+// Private Functions:
+//------------------------------------------------------------------------------
