@@ -36,7 +36,7 @@ class Engine
 public:
     Engine();
 
-    void AddSystem(System& system, bool updateWhileInspecting = false);
+    void AddSystem(System& system);
 
     bool Init();
     void Update(float dt);
@@ -44,7 +44,7 @@ public:
     void Exit();
 
 private:
-    std::array<System*, 1> m_systems;
+    std::vector<System*> m_systems; // Currently at 1 System, allocate accordingly
 
 };
 

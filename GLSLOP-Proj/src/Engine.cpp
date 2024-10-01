@@ -1,19 +1,26 @@
 ﻿//------------------------------------------------------------------------------
 //
-// File Name:	System.cpp
-// Author(s):	Gabe Gramblicka (gabriel.gramblicka)
-// Project:		
-// Course:		
+// File Name:	Engine.cpp
+// Author(s):	Gabe Gramblicka (gabriel.gramblicka)	
 //
-// Copyright (c) 2023 DigiPen (USA) Corporation.
+// Copyright (c) Gabe Gramblicka
 //
+//------------------------------------------------------------------------------
+
+//------------------------------------------------------------------------------
+// Include Files:
 //------------------------------------------------------------------------------
 
 #include "stdafx.h"
 
+#include "Engine.h"
+#include "System.h"
+
 //------------------------------------------------------------------------------
 // Private Constants:
 //------------------------------------------------------------------------------
+
+static constexpr unsigned s_systemCount = 1;
 
 //------------------------------------------------------------------------------
 // Private Typedefs:
@@ -43,3 +50,37 @@
 // Private Functions:
 //------------------------------------------------------------------------------
 
+Engine::Engine() {
+	m_systems.reserve(s_systemCount);
+}
+
+void Engine::AddSystem(System& system) {
+	m_systems.push_back(&system);
+}
+
+bool Engine::Init() {
+	for (System* system : m_systems) {
+		if (!(system)->Init()) {
+			return false;
+		}
+	}
+	return true;
+}
+
+void Engine::Update(float dt) {
+	for (System* system : m_systems) {
+		system->Update(dt);
+	}
+}
+
+void Engine::Render() const {
+	for (System* system : m_systems) {
+		system->Render();
+	}
+}
+
+void Engine::Exit() {
+	for (System* system : m_systems) {
+		system->Exit();
+	}
+}

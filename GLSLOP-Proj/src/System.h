@@ -1,11 +1,10 @@
 ﻿//------------------------------------------------------------------------------
 //
-// File Name:	System.cpp
+// File Name:	System.h
 // Author(s):	Gabe Gramblicka (gabriel.gramblicka)
-// Project:		
-// Course:		
+// Project:		GL SLOP
 //
-// Copyright (c) 2023 DigiPen (USA) Corporation.
+// Copyright (c) 2024 Gabe Gramblcika
 //
 //------------------------------------------------------------------------------
 
@@ -28,8 +27,27 @@
 //------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
-// Public Structures:
+// Classes:
 //------------------------------------------------------------------------------
+
+class System // Abstract
+{
+public:
+    System(std::string name);
+    virtual ~System() {};
+
+    static System& Instance(); // Each system should have this
+
+    virtual bool Init() { return true; }
+    virtual void Update(float dt) = 0; // Update must always be overriden
+    virtual void Render() const {}
+    virtual void Exit() {}
+
+    std::string const& GetName();
+
+private:
+    const std::string _name;
+};
 
 //------------------------------------------------------------------------------
 // Public Variables:

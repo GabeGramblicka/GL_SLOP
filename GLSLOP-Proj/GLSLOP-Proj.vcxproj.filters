@@ -10,29 +10,44 @@
     <Filter Include="Systems">
       <UniqueIdentifier>{b9250ee9-cf85-461e-9493-6a031f4f83e1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Systems\Window">
+      <UniqueIdentifier>{3a44d2d3-d734-4680-820f-8da2a710e171}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Engine\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine.cpp">
-      <Filter>Engine\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="System.cpp">
+    <ClCompile Include="src\System.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
-    <ClCompile Include="stdafx.cpp">
+    <ClCompile Include="src\WindowSystem.cpp">
+      <Filter>Systems\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine.cpp">
+      <Filter>Engine\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Main.cpp">
+      <Filter>Engine\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stdafx.cpp">
+      <Filter>Engine\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Time.cpp">
       <Filter>Engine\Framework</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Engine.h">
-      <Filter>Engine\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="System.h">
+    <ClInclude Include="src\System.h">
       <Filter>Systems</Filter>
     </ClInclude>
-    <ClInclude Include="stdafx.h">
+    <ClInclude Include="src\WindowSystem.h">
+      <Filter>Systems\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine.h">
+      <Filter>Engine\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stdafx.h">
+      <Filter>Engine\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Time.h">
       <Filter>Engine\Framework</Filter>
     </ClInclude>
   </ItemGroup>
