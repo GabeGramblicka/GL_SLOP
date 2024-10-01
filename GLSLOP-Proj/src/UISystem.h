@@ -14,6 +14,8 @@
 // Include Files:
 //------------------------------------------------------------------------------
 
+#include "System.h" // Inherit
+
 //------------------------------------------------------------------------------
 // Forward References:
 //------------------------------------------------------------------------------
@@ -25,6 +27,22 @@
 //------------------------------------------------------------------------------
 // Classes:
 //------------------------------------------------------------------------------
+
+class UISystem : public System {
+public:
+	static System& Instance();
+private:
+	static UISystem s_instance;
+
+	UISystem();
+	bool Init() override;
+	void Update(float dt) override;
+	void Render() const override;
+	void Exit() override;
+public:
+	UISystem(const UISystem& other) = delete;
+	friend class Engine;
+};
 
 //------------------------------------------------------------------------------
 // Public Variables:

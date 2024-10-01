@@ -13,6 +13,9 @@
     <Filter Include="Systems\Window">
       <UniqueIdentifier>{3a44d2d3-d734-4680-820f-8da2a710e171}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Systems\UI">
+      <UniqueIdentifier>{e8cf86db-74c2-4dc1-95ca-45cbf07a4737}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\System.cpp">
@@ -33,6 +36,9 @@
     <ClCompile Include="src\Time.cpp">
       <Filter>Engine\Framework</Filter>
     </ClCompile>
+    <ClCompile Include="src\UISystem.cpp">
+      <Filter>Systems\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\System.h">
@@ -49,6 +55,9 @@
     </ClInclude>
     <ClInclude Include="src\Time.h">
       <Filter>Engine\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UISystem.h">
+      <Filter>Systems\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

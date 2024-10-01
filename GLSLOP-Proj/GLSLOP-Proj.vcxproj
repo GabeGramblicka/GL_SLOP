@@ -205,6 +205,7 @@ xcopy "$(ProjectDir)inc\glew32.dll" "$(OutDir)" /s /r /y /q</Command>
     </ClCompile>
     <ClCompile Include="src\System.cpp" />
     <ClCompile Include="src\Time.cpp" />
+    <ClCompile Include="src\UISystem.cpp" />
     <ClCompile Include="src\WindowSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -212,6 +213,7 @@ xcopy "$(ProjectDir)inc\glew32.dll" "$(OutDir)" /s /r /y /q</Command>
     <ClInclude Include="src\stdafx.h" />
     <ClInclude Include="src\System.h" />
     <ClInclude Include="src\Time.h" />
+    <ClInclude Include="src\UISystem.h" />
     <ClInclude Include="src\WindowSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

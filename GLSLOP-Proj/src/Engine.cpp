@@ -20,7 +20,7 @@
 // Private Constants:
 //------------------------------------------------------------------------------
 
-static constexpr unsigned s_systemCount = 1;
+static constexpr unsigned s_systemCount = 2;
 
 //------------------------------------------------------------------------------
 // Private Typedefs:

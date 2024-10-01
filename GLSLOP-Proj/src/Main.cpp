@@ -17,8 +17,11 @@
 #include <GL\GL.h>
 
 #include "Engine.h"
-#include "WindowSystem.h"
 #include "Time.h"
+
+// Systems
+#include "WindowSystem.h"
+#include "UISystem.h"
 
 //------------------------------------------------------------------------------
 // Private Constants:
@@ -50,7 +53,9 @@
 
 int main(int argc, char* argv[]) {
 	Engine engine;
+	// Add Systems //
 	engine.AddSystem(WindowSystem::Instance());
+	engine.AddSystem(UISystem    ::Instance());
 
 	if (!engine.Init()) {
 		return 1;
