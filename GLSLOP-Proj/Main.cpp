@@ -7,13 +7,13 @@
 //
 //------------------------------------------------------------------------------
 
+#include "stdafx.h"
+
 #define SDL_MAIN_HANDLED
 #include <SDL2\SDL.h>
 #include <SDL2\SDL_main.h>
 #include <GL\glew.h> // Must come before GL.h
 #include <GL\GL.h>
-
-#include <math.h>
 
 //------------------------------------------------------------------------------
 // Private Constants:

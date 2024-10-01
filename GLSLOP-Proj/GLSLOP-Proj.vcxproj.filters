@@ -7,6 +7,9 @@
     <Filter Include="Engine\Framework">
       <UniqueIdentifier>{d2b7ea2a-35c9-40c6-be42-c18c8a3d1690}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Systems">
+      <UniqueIdentifier>{b9250ee9-cf85-461e-9493-6a031f4f83e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -15,9 +18,21 @@
     <ClCompile Include="Engine.cpp">
       <Filter>Engine\Framework</Filter>
     </ClCompile>
+    <ClCompile Include="System.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Engine\Framework</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h">
+      <Filter>Engine\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
       <Filter>Engine\Framework</Filter>
     </ClInclude>
   </ItemGroup>

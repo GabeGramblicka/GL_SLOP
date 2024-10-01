@@ -1,9 +1,11 @@
 ﻿//------------------------------------------------------------------------------
 //
-// File Name:	Engine.h
+// File Name:	System.cpp
 // Author(s):	Gabe Gramblicka (gabriel.gramblicka)
+// Project:		
+// Course:		
 //
-// Copyright (c) Gabe Gramblicka
+// Copyright (c) 2023 DigiPen (USA) Corporation.
 //
 //------------------------------------------------------------------------------
 
@@ -17,8 +19,6 @@
 // Forward References:
 //------------------------------------------------------------------------------
 
-class System;
-
 //------------------------------------------------------------------------------
 // Public Constants:
 //------------------------------------------------------------------------------
@@ -30,23 +30,6 @@ class System;
 //------------------------------------------------------------------------------
 // Public Structures:
 //------------------------------------------------------------------------------
-
-class Engine
-{
-public:
-    Engine();
-
-    void AddSystem(System& system, bool updateWhileInspecting = false);
-
-    bool Init();
-    void Update(float dt);
-    void Render() const;
-    void Exit();
-
-private:
-    std::array<System*, 1> m_systems;
-
-};
 
 //------------------------------------------------------------------------------
 // Public Variables:
