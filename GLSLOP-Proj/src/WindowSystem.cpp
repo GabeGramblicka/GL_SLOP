@@ -36,7 +36,7 @@ WindowSystem WindowSystem::s_instance = WindowSystem();
 bool WindowSystem::s_isRunning = true;
 SDL_Window* WindowSystem::s_window = nullptr;
 SDL_GLContext WindowSystem::s_context;
-
+glm::ivec2 WindowSystem::m_windowSize;
 
 //------------------------------------------------------------------------------
 // Private Function Declarations:
@@ -52,6 +52,10 @@ System& WindowSystem::Instance() {
 
 SDL_Window* WindowSystem::Window() {
 	return s_window;
+}
+
+glm::ivec2 WindowSystem::WindowSize() {
+	return m_windowSize;
 }
 
 SDL_GLContext WindowSystem::Context() {
@@ -70,8 +74,9 @@ bool WindowSystem::Init(){
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
 		return false;
 	}
+	m_windowSize = { 600, 600 };
 	s_window = SDL_CreateWindow("GLSLOP", SDL_WINDOWPOS_UNDEFINED,
-		SDL_WINDOWPOS_UNDEFINED, 600, 600,
+		SDL_WINDOWPOS_UNDEFINED, m_windowSize.x, m_windowSize.y,
 		SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
 	s_context = SDL_GL_CreateContext(s_window);
 	return true;
@@ -93,7 +98,7 @@ void WindowSystem::Update(float dt) {
 }
 
 void WindowSystem::Render() const {
-	PGE::Window::CreateViewport(600, 600);
+	PGE::Window::CreateViewport(m_windowSize.x, m_windowSize.y);
 	PGE::ClearBackground();
 	SDL_GL_SwapWindow(s_window);
 }
