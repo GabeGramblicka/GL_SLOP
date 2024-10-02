@@ -43,6 +43,7 @@ public:
 	static bool s_isRunning;
 
 	static SDL_Window* Window();
+	static glm::ivec2 WindowSize();
 	static SDL_GLContext Context();
 private:
 	static WindowSystem s_instance;
@@ -55,6 +56,8 @@ private:
 	void Update(float dt) override;
 	void Render() const override;
 	void Exit() override;
+
+	static glm::ivec2 m_windowSize;
 public:
 	WindowSystem(const WindowSystem& other) = delete;
 	friend class Engine;

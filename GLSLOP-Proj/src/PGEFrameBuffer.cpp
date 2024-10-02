@@ -16,10 +16,7 @@
 #include "stdafx.h"
 #include "PGEFrameBuffer.h"
 
-#include "Trace.h"
 #include "WindowSystem.h"
-#include "Camera.h"
-
 //------------------------------------------------------------------------------
 // Private Function Declarations:
 //------------------------------------------------------------------------------
@@ -37,11 +34,11 @@ GLuint PGE::FrameBuffer::_textureId;
 
 void PGE::FrameBuffer::CreateFrameBuffer()
 {
-	glm::ivec2 windowSize = WindowSystem::GetWindowSize();
-	glGenFramebuffers(1, &_FBO);
-	PGE::CheckError();
-	glBindFramebuffer(GL_FRAMEBUFFER, _FBO);
-	PGE::CheckError();
+	glm::ivec2 windowSize = WindowSystem::WindowSize();
+	//glGenFramebuffers(1, &_FBO);
+	//PGE::CheckError();
+	//glBindFramebuffer(GL_FRAMEBUFFER, _FBO);
+	//PGE::CheckError();
 
 	glGenTextures(1, &_textureId);
 	PGE::CheckError();
@@ -63,13 +60,13 @@ void PGE::FrameBuffer::CreateFrameBuffer()
 	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, windowSize.x, windowSize.y);
 	PGE::CheckError();
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, _RBO);
-
+	
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 	{
-		Trace::Log() << "ERROR::FRAMEBUFFER:: Framebuffer is not complete!" << Trace::endl;
+		std::cerr << "ERROR::FRAMEBUFFER:: Framebuffer is not complete!" << std::endl;
 	}
 	PGE::CheckError();
-
+	
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	PGE::CheckError();
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -80,19 +77,19 @@ void PGE::FrameBuffer::CreateFrameBuffer()
 
 void PGE::FrameBuffer::BindFrameBuffer()
 {
-	glBindFramebuffer(GL_FRAMEBUFFER, _FBO);
+	//glBindFramebuffer(GL_FRAMEBUFFER, _FBO);
 	PGE::CheckError();
 }
 
 void PGE::FrameBuffer::UnbindFrameBuffer()
 {
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	PGE::CheckError();
 }
 
 void PGE::FrameBuffer::RescaleFrameBuffer(GLsizei width, GLsizei height)
 {
-	Camera::CameraResizeViewport(WindowSystem::GetWindow(), width, height);
+	//Camera::CameraResizeViewport(WindowSystem::Window(), width, height);
 }
 
 GLuint PGE::FrameBuffer::GetTextureId()

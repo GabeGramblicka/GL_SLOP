@@ -41,9 +41,6 @@ namespace PGE
 	void SetBackgroundColor(PGE::Color color);
 	PGE::Color GetBackgroundColor();
 
-	float GetVecMagnitude(glm::vec2 vec);
-	float GetAngle2VecRad(glm::vec2 vec0, glm::vec2 vec1);
-
 	// Sets the blend mode for translucent objects
 	// Params:
 	//     mode - blendmode to choose 
