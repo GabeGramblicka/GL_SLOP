@@ -15,6 +15,8 @@
 #include "stdafx.h"
 #include "UISystem.h"
 
+#include "WindowSystem.h"
+
 //------------------------------------------------------------------------------
 // Private Classes:
 //------------------------------------------------------------------------------
@@ -45,12 +47,31 @@ System& UISystem::Instance() {
 // Private Functions:
 //------------------------------------------------------------------------------
 
-
 UISystem::UISystem()
  : System("UISystem") {
 }
 
 bool UISystem::Init() {
+	// Setup ImGui
+	//const char* glsl_version = "#version 430";
+	//
+	//IMGUI_CHECKVERSION();
+	//ImGui::CreateContext();
+	//ImGuiIO& io = ImGui::GetIO();
+	//
+	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+	//io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+	//io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+	//io.ConfigFlags |= ImGuiConfigFlags_NoMouseCursorChange;
+	//
+	//ImGui_ImplSDL2_InitForOpenGL(WindowSystem::Window(), WindowSystem::Context());
+	//ImGui_ImplOpenGL3_Init(glsl_version);
+	//
+	//ImVec2 wSize(300.0f, 500.0f);
+	//ImGui::SetNextWindowSize(wSize);
+
+	IMGUI_CHECKVERSION();
+
 	return true;
 }
 

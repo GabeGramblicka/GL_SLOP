@@ -41,11 +41,14 @@ class WindowSystem : public System {
 public:
 	static System& Instance();
 	static bool s_isRunning;
+
+	static SDL_Window* Window();
+	static SDL_GLContext Context();
 private:
 	static WindowSystem s_instance;
 
-	SDL_GLContext m_context;
-	SDL_Window* m_window;
+	static SDL_GLContext s_context;
+	static SDL_Window* s_window;
 
 	WindowSystem();
 	bool Init() override;

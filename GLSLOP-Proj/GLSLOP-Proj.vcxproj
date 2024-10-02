@@ -71,22 +71,22 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)lib\SDL2;$(SolutionDir)lib\ImGui</IncludePath>
+    <IncludePath>$(SolutionDir)lib\SDL2;$(SolutionDir)lib\ImGui;$(SolutionDir)inc\ImGui</IncludePath>
     <LibraryPath>$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
     <ExternalIncludePath>$(SolutionDir)inc;$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)lib\SDL2;$(SolutionDir)lib\ImGui</IncludePath>
+    <IncludePath>$(SolutionDir)lib\SDL2;$(SolutionDir)lib\ImGui;$(SolutionDir)inc\ImGui</IncludePath>
     <LibraryPath>$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
     <ExternalIncludePath>$(SolutionDir)inc;$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)lib\SDL2;$(SolutionDir)lib\ImGui</IncludePath>
+    <IncludePath>$(SolutionDir)lib\SDL2;$(SolutionDir)lib\ImGui;$(SolutionDir)inc\ImGui</IncludePath>
     <LibraryPath>$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
     <ExternalIncludePath>$(SolutionDir)inc;$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(SolutionDir)lib\SDL2;$(SolutionDir)lib\ImGui</IncludePath>
+    <IncludePath>$(SolutionDir)lib\SDL2;$(SolutionDir)lib\ImGui;$(SolutionDir)inc\ImGui</IncludePath>
     <LibraryPath>$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
     <ExternalIncludePath>$(SolutionDir)inc;$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
@@ -195,6 +195,23 @@ xcopy "$(ProjectDir)inc\glew32.dll" "$(OutDir)" /s /r /y /q</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="inc\imGui\imgui.cpp" />
+    <ClCompile Include="inc\imGui\imgui_demo.cpp" />
+    <ClCompile Include="inc\imGui\imgui_draw.cpp" />
+    <ClCompile Include="inc\imGui\imgui_impl_opengl3.cpp">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">TurnOffAllWarnings</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">TurnOffAllWarnings</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">TurnOffAllWarnings</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="inc\imGui\imgui_impl_sdl2.cpp" />
+    <ClCompile Include="inc\imGui\imgui_stdlib.cpp" />
+    <ClCompile Include="inc\imGui\imgui_tables.cpp" />
+    <ClCompile Include="inc\imGui\imgui_widgets.cpp" />
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\stdafx.cpp">
@@ -209,6 +226,16 @@ xcopy "$(ProjectDir)inc\glew32.dll" "$(OutDir)" /s /r /y /q</Command>
     <ClCompile Include="src\WindowSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="inc\imGui\imconfig.h" />
+    <ClInclude Include="inc\imGui\imgui.h" />
+    <ClInclude Include="inc\imGui\imgui_impl_opengl3.h" />
+    <ClInclude Include="inc\imGui\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="inc\imGui\imgui_impl_sdl2.h" />
+    <ClInclude Include="inc\imGui\imgui_internal.h" />
+    <ClInclude Include="inc\imGui\imgui_stdlib.h" />
+    <ClInclude Include="inc\imGui\imstb_rectpack.h" />
+    <ClInclude Include="inc\imGui\imstb_textedit.h" />
+    <ClInclude Include="inc\imGui\imstb_truetype.h" />
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\stdafx.h" />
     <ClInclude Include="src\System.h" />

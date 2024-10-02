@@ -13,9 +13,6 @@
 
 #include "stdafx.h"
 
-#include <GL\glew.h> // Must come before GL.h
-#include <GL\GL.h>
-
 #include "Engine.h"
 #include "Time.h"
 
@@ -53,7 +50,7 @@
 
 int main(int argc, char* argv[]) {
 	Engine engine;
-	// Add Systems //
+	// Add Systems
 	engine.AddSystem(WindowSystem::Instance());
 	engine.AddSystem(UISystem    ::Instance());
 

@@ -16,6 +16,9 @@
 
 #include "System.h" // Inherit
 
+#include <ImGui\imgui_impl_opengl3.h> // Platform
+#include <ImGui\imgui_impl_sdl2.h>	  // Renderer
+
 //------------------------------------------------------------------------------
 // Forward References:
 //------------------------------------------------------------------------------
