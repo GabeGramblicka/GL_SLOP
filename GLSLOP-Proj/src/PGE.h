@@ -32,6 +32,8 @@ namespace PGE
 	void CheckError();
 	bool CheckErrorSilent();
 
+	bool LibInit();
+
 	// Clears the background for the next frame
 	void ClearBackground();
 

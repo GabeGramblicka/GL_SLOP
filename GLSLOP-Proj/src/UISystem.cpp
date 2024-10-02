@@ -17,6 +17,7 @@
 
 #include "WindowSystem.h"
 #include "PGE.h"
+#include "PGEFrameBuffer.h"
 
 //------------------------------------------------------------------------------
 // Private Classes:
@@ -77,6 +78,8 @@ bool UISystem::Init() {
 	ImVec2 wSize(300.0f, 500.0f);
 	ImGui::SetNextWindowSize(wSize);
 
+	PGE::FrameBuffer::CreateFrameBuffer();
+
 	return true;
 }
 
@@ -93,10 +96,13 @@ void UISystem::Update(float dt) {
 }
 
 void UISystem::Render() const {
+	// PGE::FrameBuffer::UnbindFrameBuffer();
 
 	PGE::ClearBackground();
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+	// PGE::FrameBuffer::BindFrameBuffer();
 
 	ImGuiIO& io = ImGui::GetIO();
 	if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {

@@ -52,6 +52,15 @@ bool PGE::CheckErrorSilent()
 #endif
 }
 
+bool PGE::LibInit() {
+    GLenum value = glewInit();
+    if (value != GLEW_OK) {
+        std::cout << glewGetErrorString(value) << std::endl;
+        return false;
+    }
+    return true;
+}
+
 void PGE::ClearBackground()
 {
     glClear(GL_COLOR_BUFFER_BIT);

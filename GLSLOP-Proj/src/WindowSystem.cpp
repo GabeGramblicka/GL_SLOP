@@ -79,6 +79,12 @@ bool WindowSystem::Init(){
 		SDL_WINDOWPOS_UNDEFINED, m_windowSize.x, m_windowSize.y,
 		SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
 	s_context = SDL_GL_CreateContext(s_window);
+
+	// Init glew
+	if (!PGE::LibInit()) {
+		return false;
+	}
+
 	return true;
 }
 
@@ -99,6 +105,7 @@ void WindowSystem::Update(float dt) {
 
 void WindowSystem::Render() const {
 	PGE::Window::CreateViewport(m_windowSize.x, m_windowSize.y);
+	PGE::SetBackgroundColor(PGE::Color(0.15f));
 	PGE::ClearBackground();
 	SDL_GL_SwapWindow(s_window);
 }

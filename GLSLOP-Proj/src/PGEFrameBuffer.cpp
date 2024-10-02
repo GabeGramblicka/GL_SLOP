@@ -35,10 +35,10 @@ GLuint PGE::FrameBuffer::_textureId;
 void PGE::FrameBuffer::CreateFrameBuffer()
 {
 	glm::ivec2 windowSize = WindowSystem::WindowSize();
-	//glGenFramebuffers(1, &_FBO);
-	//PGE::CheckError();
-	//glBindFramebuffer(GL_FRAMEBUFFER, _FBO);
-	//PGE::CheckError();
+	glGenFramebuffers(1, &_FBO);
+	PGE::CheckError();
+	glBindFramebuffer(GL_FRAMEBUFFER, _FBO);
+	PGE::CheckError();
 
 	glGenTextures(1, &_textureId);
 	PGE::CheckError();
@@ -77,13 +77,13 @@ void PGE::FrameBuffer::CreateFrameBuffer()
 
 void PGE::FrameBuffer::BindFrameBuffer()
 {
-	//glBindFramebuffer(GL_FRAMEBUFFER, _FBO);
+	glBindFramebuffer(GL_FRAMEBUFFER, _FBO);
 	PGE::CheckError();
 }
 
 void PGE::FrameBuffer::UnbindFrameBuffer()
 {
-	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	PGE::CheckError();
 }
 
