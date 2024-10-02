@@ -61,6 +61,7 @@ int main(int argc, char* argv[]) {
 	while (WindowSystem::s_isRunning) {
 		float dt = Time::GetDelta();
 		engine.Update(dt);
+		engine.Render();
 	}
 	engine.Exit();
 	return 0;

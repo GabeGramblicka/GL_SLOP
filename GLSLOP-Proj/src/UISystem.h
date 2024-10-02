@@ -34,6 +34,7 @@
 class UISystem : public System {
 public:
 	static System& Instance();
+	static void ProcessEvents(SDL_Event* event);
 private:
 	static UISystem s_instance;
 

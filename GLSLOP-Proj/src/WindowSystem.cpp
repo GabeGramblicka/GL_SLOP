@@ -15,6 +15,11 @@
 #include "stdafx.h"
 #include "WindowSystem.h"
 
+#include "PGE.h"
+#include "PGEWindow.h"
+#include "UISystem.h" // Not the best to include another system but there's no 
+					  // fast simple solution
+
 //------------------------------------------------------------------------------
 // Private Classes:
 //------------------------------------------------------------------------------
@@ -75,20 +80,26 @@ bool WindowSystem::Init(){
 void WindowSystem::Update(float dt) {
 	SDL_Event event;
 	while (SDL_PollEvent(&event)) {
-		switch (event.type) {
-		case SDL_QUIT:
+		UISystem::ProcessEvents(&event);
+		if (event.type == SDL_QUIT) {
 			s_isRunning = false;
-			break;
+		}
+		if (event.type == SDL_WINDOWEVENT &&
+			event.window.event == SDL_WINDOWEVENT_CLOSE &&
+			event.window.windowID == SDL_GetWindowID(s_window)) {
+			s_isRunning = false;
 		}
 	}
-	SDL_GL_SwapWindow(s_window);
 }
 
-void WindowSystem::Render() const
-{
+void WindowSystem::Render() const {
+	PGE::Window::CreateViewport(600, 600);
+	PGE::ClearBackground();
+	SDL_GL_SwapWindow(s_window);
 }
 
 void WindowSystem::Exit() {
 	SDL_GL_DeleteContext(s_context);
+	SDL_DestroyWindow(s_window);
 	SDL_Quit();
 }
