@@ -100,14 +100,13 @@ void WindowSystem::Update(float dt) {
 			event.window.windowID == SDL_GetWindowID(s_window)) {
 			s_isRunning = false;
 		}
+		if (event.window.event == SDL_WINDOWEVENT_RESIZED) {
+			m_windowSize = { event.window.data1, event.window.data2 };
+		}
 	}
 }
 
 void WindowSystem::Render() const {
-	PGE::Window::CreateViewport(m_windowSize.x, m_windowSize.y);
-	PGE::SetBackgroundColor(PGE::Color(0.15f));
-	PGE::ClearBackground();
-	SDL_GL_SwapWindow(s_window);
 }
 
 void WindowSystem::Exit() {
