@@ -16,6 +16,15 @@
     <Filter Include="Systems\UI">
       <UniqueIdentifier>{e8cf86db-74c2-4dc1-95ca-45cbf07a4737}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Extern">
+      <UniqueIdentifier>{aef7ff0c-e04f-4304-903e-6a0b51f01d64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Extern\ImGui">
+      <UniqueIdentifier>{780c5669-81e2-475a-8bbd-29c59d017fea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Extern\PGE">
+      <UniqueIdentifier>{c12e69a8-1300-4b7d-8fb5-5fca01e9f30a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\System.cpp">
@@ -39,6 +48,36 @@
     <ClCompile Include="src\UISystem.cpp">
       <Filter>Systems\UI</Filter>
     </ClCompile>
+    <ClCompile Include="inc\imGui\imgui.cpp">
+      <Filter>Extern\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\imGui\imgui_demo.cpp">
+      <Filter>Extern\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\imGui\imgui_draw.cpp">
+      <Filter>Extern\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\imGui\imgui_impl_opengl3.cpp">
+      <Filter>Extern\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\imGui\imgui_impl_sdl2.cpp">
+      <Filter>Extern\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\imGui\imgui_stdlib.cpp">
+      <Filter>Extern\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\imGui\imgui_tables.cpp">
+      <Filter>Extern\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\imGui\imgui_widgets.cpp">
+      <Filter>Extern\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PGE.cpp">
+      <Filter>Extern\PGE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PGEWindow.cpp">
+      <Filter>Extern\PGE</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\System.h">
@@ -58,6 +97,40 @@
     </ClInclude>
     <ClInclude Include="src\UISystem.h">
       <Filter>Systems\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\imGui\imconfig.h" />
+    <ClInclude Include="inc\imGui\imgui.h">
+      <Filter>Extern\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\imGui\imgui_impl_opengl3.h">
+      <Filter>Extern\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\imGui\imgui_impl_opengl3_loader.h">
+      <Filter>Extern\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\imGui\imgui_impl_sdl2.h">
+      <Filter>Extern\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\imGui\imgui_internal.h">
+      <Filter>Extern\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\imGui\imgui_stdlib.h">
+      <Filter>Extern\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\imGui\imstb_rectpack.h">
+      <Filter>Extern\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\imGui\imstb_textedit.h">
+      <Filter>Extern\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\imGui\imstb_truetype.h">
+      <Filter>Extern\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PGE.h">
+      <Filter>Extern\PGE</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PGEWindow.h">
+      <Filter>Extern\PGE</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

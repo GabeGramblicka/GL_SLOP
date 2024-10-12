@@ -18,6 +18,7 @@
 #include "WindowSystem.h"
 #include "PGE.h"
 #include "PGEWindow.h"
+#include "nfd\nfd.h"
 
 //------------------------------------------------------------------------------
 // Private Classes:
@@ -38,6 +39,9 @@ static bool s_showDemoWindow = true;
 //------------------------------------------------------------------------------
 // Private Function Declarations:
 //------------------------------------------------------------------------------
+
+static void ChooseFolder();
+static void OpenFolderDialog();
 
 //------------------------------------------------------------------------------
 // Public Functions:
@@ -89,6 +93,9 @@ void UISystem::Update(float dt) {
 
 	// Create a borderless, non-resizable ImGui window
 	ImGui::Begin("FullScreenWindow", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove);
+
+	ChooseFolder();
+
 	ImGui::End();
 }
 
@@ -109,4 +116,28 @@ void UISystem::Exit() {
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
 	ImGui::DestroyContext();
+}
+
+void ChooseFolder() {
+	glm::ivec2 w = WindowSystem::WindowSize();
+	if (ImGui::Button("Choose Folder", { 110.0f, 40.0f })) {
+		OpenFolderDialog();
+	}
+	//ImGui::Text("");
+}
+
+void OpenFolderDialog() {
+	nfdchar_t* outPath = nullptr;
+	nfdresult_t result = NFD_PickFolder(NULL, &outPath);
+
+	if (result == NFD_OKAY) {
+		std::cout << "Selected folder: " << outPath << std::endl;
+		free(outPath); // Don't forget to free the allocated string
+	}
+	else if (result == NFD_CANCEL) {
+		std::cout << "User canceled." << std::endl;
+	}
+	else {
+		std::cerr << "Error: " << NFD_GetError() << std::endl;
+	}
 }

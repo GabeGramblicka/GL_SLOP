@@ -79,6 +79,7 @@ bool WindowSystem::Init(){
 		SDL_WINDOWPOS_UNDEFINED, m_windowSize.x, m_windowSize.y,
 		SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
 	s_context = SDL_GL_CreateContext(s_window);
+	SDL_SetWindowMinimumSize(s_window, 400, 300); // Change as needed
 
 	// Init glew
 	if (!PGE::LibInit()) {

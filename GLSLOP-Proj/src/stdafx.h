@@ -20,6 +20,8 @@
 
 // #pragma warning(push, 0)
 
+#pragma comment (lib, "comctl32")
+
 #define IMGUI_DEFINE_MATH_OPERATORS // For imgui.h
 #include <imGui\imgui.h>
 #include <imGui\imgui_stdlib.h>
