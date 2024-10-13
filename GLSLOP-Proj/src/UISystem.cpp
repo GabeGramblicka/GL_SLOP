@@ -87,7 +87,7 @@ void UISystem::Update(float dt) {
 
 	glm::ivec2 wSize = WindowSystem::WindowSize();
 
-	ImGui::Begin("Dockspace", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTabs);
+	ImGui::Begin("Dockspace", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
 	ImGui::DockSpace(ImGui::GetID("Dockspace"));
 	ImGui::SetWindowSize(ImVec2(wSize.x, wSize.y));
 
