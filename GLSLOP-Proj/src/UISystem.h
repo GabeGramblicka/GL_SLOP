@@ -49,11 +49,13 @@ private:
 	void Render() const override;
 	void Exit() override;
 
-	void ChooseFolder();
+	bool ChooseFolder();
 	void PickFolder(Dir& dir);
 
-	void ChooseFile(ST shader);
+	bool ChooseFile(ST shader);
 	void PickFile(ST shader, Dir& dir);
+
+	void Compile();
 
 	void Clear(Dir& dir, const std::string& id); 
 	Data m_data;

@@ -79,7 +79,15 @@ std::pair<std::string, bool> Data::OpenFolderDialog(std::ostringstream& os) {
 
 std::pair<std::string, bool> Data::OpenShader(ST shader, std::ostringstream& os) {
   nfdchar_t* outPath;
-  const nfdchar_t* filters = { "vert glsl vs" };
+  const nfdchar_t* filters = nullptr;
+  switch (shader) {
+  case VERT:
+	filters = { "vert,glsl,vs,txt" };
+	break;
+  case FRAG:
+	filters = { "frag,glsl,fs,txt" };
+	break;
+  }
   nfdresult_t result = NFD_OpenDialog(filters, nullptr, &outPath);
 
   if (result == NFD_OKAY) {

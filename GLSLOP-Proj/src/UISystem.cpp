@@ -92,14 +92,25 @@ void UISystem::Update(float dt) {
 								     | ImGuiWindowFlags_NoTitleBar);
 	  ImGui::DockSpace(ImGui::GetID("Dockspace"));
 	  ImGui::SetWindowSize(ImVec2(wSize.x, wSize.y));
-
+	  bool file = false;
 	  ImGui::Begin("Choose Folder");
-		ChooseFolder();
+	  if (ChooseFolder()) {
 		SeparatorWithText("Shaders:");
-		ChooseFile(VERT);
-		ChooseFile(FRAG);
+		file = ChooseFile(VERT);
+		file = ChooseFile(FRAG);
 
-		ConsoleOutput();
+	  }
+	  else {
+		SeparatorWithText("Shaders:");
+	  }
+
+	  ConsoleOutput();
+	  ImGui::End();
+	  
+	  ImGui::Begin("Compiler");
+	  if (file) {
+		Compile();
+	  }
 	  ImGui::End();
 
 	ImGui::End();
@@ -124,7 +135,7 @@ void UISystem::Exit() {
 	ImGui::DestroyContext();
 }
 
-void UISystem::ChooseFolder() {
+bool UISystem::ChooseFolder() {
   PickFolder(m_data[FOLDER]);
 
   ImGui::SameLine();
@@ -132,6 +143,7 @@ void UISystem::ChooseFolder() {
 
   ImGui::Text("Folder: %s", m_data[FOLDER].first.c_str());
 
+  return m_data[FOLDER].second;
 }
 
 void UISystem::PickFolder(Dir& dir) {
@@ -148,7 +160,7 @@ void UISystem::PickFolder(Dir& dir) {
   ImGui::PopStyleColor();
 }
 
-void UISystem::ChooseFile(ST shader) {
+bool UISystem::ChooseFile(ST shader) {
   switch (shader) {
   case VERT:
 	PickFile(VERT, m_data[VERT]);
@@ -163,6 +175,7 @@ void UISystem::ChooseFile(ST shader) {
 	ImGui::Text("File: %s", m_data[FRAG].first.c_str());
 	break;
   }
+  return m_data[FRAG].second && m_data[VERT].second;
 }
 
 void UISystem::PickFile(ST shader, Dir& dir) {
@@ -187,6 +200,12 @@ void UISystem::PickFile(ST shader, Dir& dir) {
 	dir = Data::OpenShader(shader, m_data.OB());
   }
   ImGui::PopStyleColor();
+}
+
+void UISystem::Compile() {
+  if (ImGui::Button("Compile Shaders", { 150.0f, 40.0f })) {
+	// call from compile.cpp
+  }
 }
 
 void UISystem::Clear(Dir& dir, const std::string& id) {
