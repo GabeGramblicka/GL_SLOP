@@ -90,7 +90,10 @@
     <ClCompile Include="src\nfd_win.cpp">
       <Filter>Extern\nfd</Filter>
     </ClCompile>
-    <ClCompile Include="Compiler.cpp">
+    <ClCompile Include="src\Compiler.cpp">
+      <Filter>GL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Data.cpp">
       <Filter>GL</Filter>
     </ClCompile>
   </ItemGroup>
@@ -152,7 +155,10 @@
     <ClInclude Include="inc\imGui\imconfig.h">
       <Filter>Extern\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="Compiler.h">
+    <ClInclude Include="src\Compiler.h">
+      <Filter>GL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Data.h">
       <Filter>GL</Filter>
     </ClInclude>
   </ItemGroup>

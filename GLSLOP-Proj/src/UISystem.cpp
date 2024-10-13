@@ -18,6 +18,7 @@
 #include "WindowSystem.h"
 #include "PGE.h"
 #include "PGEWindow.h"
+#include "Compiler.h"
 
 //------------------------------------------------------------------------------
 // Private Classes:
@@ -28,6 +29,7 @@
 //------------------------------------------------------------------------------
 
 UISystem UISystem::s_instance = UISystem();
+std::ostringstream Data::m_outputBuffer;
 
 //------------------------------------------------------------------------------
 // Private Variables:
@@ -204,7 +206,7 @@ void UISystem::PickFile(ST shader, Dir& dir) {
 
 void UISystem::Compile() {
   if (ImGui::Button("Compile Shaders", { 150.0f, 40.0f })) {
-	// call from compile.cpp
+	Compiler* o = new Compiler(m_data[FRAG], m_data[VERT]);
   }
 }
 

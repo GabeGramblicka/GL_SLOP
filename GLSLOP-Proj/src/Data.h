@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 //
-// File Name:	Compiler.h
+// File Name:	Data.h
 // Author(s):	Gabe Gramblicka (gabriel.gramblicka)
 // Project:		GL SLOP
 //
@@ -47,7 +47,7 @@ using ST = ShaderType;
 
 class Data {
 public:
-  std::ostringstream& OB() { return m_outputBuffer; }
+  static std::ostringstream& OB() { return m_outputBuffer; }
 
   Dir& operator[](std::size_t index);
   Dir Folder();
@@ -57,5 +57,5 @@ public:
   static std::pair<std::string, bool> OpenShader(ST shader, std::ostringstream& os);
 private:
   std::array<Dir, 3> m_dir = { std::make_pair("None", false) };
-  std::ostringstream m_outputBuffer;
+  static std::ostringstream m_outputBuffer;
 };

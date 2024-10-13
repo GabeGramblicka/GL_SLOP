@@ -10,8 +10,15 @@
 
 #pragma once
 
+#include "GL\glew.h"
+#include "GL\GL.h"
+
+#include "Data.h"
+
 class Compiler {
 public:
-  Compiler();
+  Compiler(Dir virtDir, Dir fragDir);
   ~Compiler();
+private:
+  GLuint m_program;
 };
