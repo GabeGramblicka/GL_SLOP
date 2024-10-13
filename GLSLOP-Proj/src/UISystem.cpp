@@ -35,13 +35,14 @@ UISystem UISystem::s_instance = UISystem();
 //------------------------------------------------------------------------------
 
 static bool s_showDemoWindow = true;
+static std::pair<std::string, bool> s_currFolder = std::make_pair("None", false);
 
 //------------------------------------------------------------------------------
 // Private Function Declarations:
 //------------------------------------------------------------------------------
 
 static void ChooseFolder();
-static void OpenFolderDialog();
+static std::pair<std::string, bool> OpenFolderDialog();
 
 //------------------------------------------------------------------------------
 // Public Functions:
@@ -120,19 +121,37 @@ void UISystem::Exit() {
 
 void ChooseFolder() {
 	glm::ivec2 w = WindowSystem::WindowSize();
-	if (ImGui::Button("Choose Folder", { 110.0f, 40.0f })) {
-		OpenFolderDialog();
+	if (s_currFolder.second == false) {
+		ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.4f, 0.45f, 0.49f, 1.0f));
+		s_currFolder.first = "None";
 	}
-	//ImGui::Text("");
+	else {
+		ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.1f, 0.25f, 0.62f, 1.0f));
+	}
+	if (ImGui::Button("Choose Folder", { 110.0f, 40.0f })) {
+		s_currFolder = OpenFolderDialog();
+	}
+	ImGui::PopStyleColor();
+
+	ImGui::SameLine();
+	ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.85f, 0.45f, 0.49f, 1.0f));
+	if (ImGui::Button("Clear", { 45.0f, 40.0f })) {
+		s_currFolder.first = "None";
+	}
+	ImGui::PopStyleColor();
+
+	ImGui::Text("Folder: %s", s_currFolder.first.c_str());
 }
 
-void OpenFolderDialog() {
+std::pair<std::string, bool> OpenFolderDialog() {
 	nfdchar_t* outPath = nullptr;
 	nfdresult_t result = NFD_PickFolder(NULL, &outPath);
 
 	if (result == NFD_OKAY) {
 		std::cout << "Selected folder: " << outPath << std::endl;
+		std::string folder(outPath);
 		free(outPath); // Don't forget to free the allocated string
+		return std::make_pair(folder, true);
 	}
 	else if (result == NFD_CANCEL) {
 		std::cout << "User canceled." << std::endl;
@@ -140,4 +159,5 @@ void OpenFolderDialog() {
 	else {
 		std::cerr << "Error: " << NFD_GetError() << std::endl;
 	}
+	return std::make_pair("None", true);
 }
