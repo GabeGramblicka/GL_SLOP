@@ -16,6 +16,8 @@
 #include "Data.h"
 
 #include <sstream>
+#include "nfd\nfd.h"
+
 //------------------------------------------------------------------------------
 // Private Classes:
 //------------------------------------------------------------------------------
@@ -54,4 +56,43 @@ Dir Data::VertexShader() {
 
 Dir Data::FragmentShader() {
   return m_dir[FRAG];
+}
+
+std::pair<std::string, bool> Data::OpenFolderDialog(std::ostringstream& os) {
+  nfdchar_t* outPath = nullptr;
+  nfdresult_t result = NFD_PickFolder(nullptr, &outPath);
+
+  if (result == NFD_OKAY) {
+	os << "Selected folder: " << outPath << std::endl;
+	std::string folder(outPath);
+	free(outPath); // Don't forget to free the allocated string
+	return std::make_pair(folder, true);
+  }
+  else if (result == NFD_CANCEL) {
+	os << "User canceled." << std::endl;
+  }
+  else {
+	os << "Error: " << NFD_GetError() << std::endl;
+  }
+  return std::make_pair("None", true);
+}
+
+std::pair<std::string, bool> Data::OpenShader(ST shader, std::ostringstream& os) {
+  nfdchar_t* outPath;
+  const nfdchar_t* filters = { "vert glsl" };
+  nfdresult_t result = NFD_OpenDialog(filters, nullptr, &outPath);
+
+  if (result == NFD_OKAY) {
+	os << "Selected File: " << outPath << std::endl;
+	std::string file(outPath);
+	free(outPath);
+	return std::make_pair(file, true);
+  }
+  else if (result == NFD_CANCEL) {
+	os << "User canceled." << std::endl;
+  }
+  else {
+	os << "Error: " << NFD_GetError() << std::endl;
+  }
+  return std::make_pair("None", true);
 }

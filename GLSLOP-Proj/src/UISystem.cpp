@@ -18,7 +18,6 @@
 #include "WindowSystem.h"
 #include "PGE.h"
 #include "PGEWindow.h"
-#include "nfd\nfd.h"
 
 //------------------------------------------------------------------------------
 // Private Classes:
@@ -140,9 +139,9 @@ void UISystem::PickFolder(Dir& dir) {
 	ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.1f, 0.25f, 0.62f, 1.0f));
   }
   if (ImGui::Button("Choose Folder", { 110.0f, 40.0f })) {
-	dir = OpenFolderDialog();
+	dir = Data::OpenFolderDialog(m_data.OB());
   }
-  ImGui::PopStyleColor(2);
+  ImGui::PopStyleColor();
 }
 
 void UISystem::ChooseFile(ST shader) {
@@ -195,44 +194,6 @@ void UISystem::ConsoleOutput() {
 	ImGui::PopStyleColor(2); // Restore previous styles
 
 	ImGui::End();
-}
-
-std::pair<std::string, bool> UISystem::OpenFolderDialog() {
-	nfdchar_t* outPath = nullptr;
-	nfdresult_t result = NFD_PickFolder(nullptr, &outPath);
-
-	if (result == NFD_OKAY) {
-		m_data.OB() << "Selected folder: " << outPath << std::endl;
-		std::string folder(outPath);
-		free(outPath); // Don't forget to free the allocated string
-		return std::make_pair(folder, true);
-	}
-	else if (result == NFD_CANCEL) {
-	  m_data.OB() << "User canceled." << std::endl;
-	}
-	else {
-	  m_data.OB() << "Error: " << NFD_GetError() << std::endl;
-	}
-	return std::make_pair("None", true);
-}
-
-std::pair<std::string, bool> UISystem::OpenShader(ST shader) {
-  nfdchar_t* outPath;
-  const nfdchar_t* filters = {"vert glsl"};
-  nfdresult_t result = NFD_OpenDialog(filters, nullptr, &outPath);
-
-  if (result == NFD_OKAY) {
-	std::string file(outPath);
-	free(outPath);
-	return std::make_pair(file, true);
-  }
-  else if (result == NFD_CANCEL) {
-	puts("User pressed cancel.");
-  }
-  else {
-	printf("Error: %s\n", NFD_GetError());
-  }
-  return std::make_pair("None", true);
 }
 
 void UISystem::PrintToOutput(const std::string& message) {

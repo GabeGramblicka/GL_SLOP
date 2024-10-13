@@ -38,9 +38,6 @@ public:
 	static System& Instance();
 	static void ProcessEvents(SDL_Event* event);
 	void PrintToOutput(const std::string& message);
-	std::pair<std::string, bool> OpenFolderDialog();
-	std::pair<std::string, bool> OpenShader(ST shader);
-	Data m_data;
 
 private:
 	static UISystem s_instance;
@@ -59,6 +56,7 @@ private:
 	void PickFile(Dir& dir);
 
 	void Clear(Dir& dir); 
+	Data m_data;
 public:
 	UISystem(const UISystem& other) = delete;
 	friend class Engine;

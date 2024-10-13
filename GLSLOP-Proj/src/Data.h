@@ -53,6 +53,8 @@ public:
   Dir Folder();
   Dir VertexShader();
   Dir FragmentShader();
+  static std::pair<std::string, bool> OpenFolderDialog(std::ostringstream& os);
+  static std::pair<std::string, bool> OpenShader(ST shader, std::ostringstream& os);
 private:
   std::array<Dir, 3> m_dir = { std::make_pair("None", false) };
   std::ostringstream m_outputBuffer;
