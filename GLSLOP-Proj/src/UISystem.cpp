@@ -39,6 +39,8 @@ static bool s_showDemoWindow = true;
 // Private Function Declarations:
 //------------------------------------------------------------------------------
 
+static void SeparatorWithText(const char* text);
+
 //------------------------------------------------------------------------------
 // Public Functions:
 //------------------------------------------------------------------------------
@@ -88,13 +90,17 @@ void UISystem::Update(float dt) {
 	ImGui::Begin("Dockspace", nullptr, ImGuiWindowFlags_NoMove
 								     | ImGuiWindowFlags_NoResize
 								     | ImGuiWindowFlags_NoTitleBar);
-	ImGui::DockSpace(ImGui::GetID("Dockspace"));
-	ImGui::SetWindowSize(ImVec2(wSize.x, wSize.y));
+	  ImGui::DockSpace(ImGui::GetID("Dockspace"));
+	  ImGui::SetWindowSize(ImVec2(wSize.x, wSize.y));
 
-	ImGui::Begin("Choose Folder");
-	ChooseFolder();
-	ConsoleOutput();
-	ImGui::End();
+	  ImGui::Begin("Choose Folder");
+		ChooseFolder();
+		SeparatorWithText("Shaders:");
+		ChooseFile(VERT);
+		ChooseFile(FRAG);
+
+		ConsoleOutput();
+	  ImGui::End();
 
 	ImGui::End();
 }
@@ -119,12 +125,10 @@ void UISystem::Exit() {
 }
 
 void UISystem::ChooseFolder() {
-  glm::ivec2 w = WindowSystem::WindowSize();
-
   PickFolder(m_data[FOLDER]);
 
   ImGui::SameLine();
-  Clear(m_data[FOLDER]);
+  Clear(m_data[FOLDER], "Folder");
 
   ImGui::Text("Folder: %s", m_data[FOLDER].first.c_str());
 
@@ -145,27 +149,56 @@ void UISystem::PickFolder(Dir& dir) {
 }
 
 void UISystem::ChooseFile(ST shader) {
-  glm::ivec2 w = WindowSystem::WindowSize();
-
-  PickFolder(m_data[FOLDER]);
-
-  ImGui::SameLine();
-  Clear(m_data[FOLDER]);
-
-  ImGui::Text("Folder: %s", m_data[FOLDER].first.c_str());
+  switch (shader) {
+  case VERT:
+	PickFile(VERT, m_data[VERT]);
+	ImGui::SameLine();
+	Clear(m_data[VERT], "Vertex Shader");
+	ImGui::Text("File: %s", m_data[VERT].first.c_str());
+	break;
+  case FRAG:
+	PickFile(FRAG, m_data[FRAG]);
+	ImGui::SameLine();
+	Clear(m_data[FRAG], "Fragment Shader");
+	ImGui::Text("File: %s", m_data[FRAG].first.c_str());
+	break;
+  }
 }
 
-void UISystem::PickFile(Dir& dir) {
+void UISystem::PickFile(ST shader, Dir& dir) {
+  std::string title;
+  switch (shader) {
+  case VERT:
+	title = "Vertex Shader";
+	break;
+  case FRAG:
+	title = "Fragment Shader";
+	break;
+  }
+
+  if (dir.second == false) {
+	ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.4f, 0.45f, 0.49f, 1.0f));
+	dir.first = "None";
+  }
+  else {
+	ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.1f, 0.25f, 0.62f, 1.0f));
+  }
+  if (ImGui::Button(title.c_str(), { 110.0f, 40.0f })) {
+	dir = Data::OpenShader(shader, m_data.OB());
+  }
+  ImGui::PopStyleColor();
 }
 
-void UISystem::Clear(Dir& dir) {
+void UISystem::Clear(Dir& dir, const std::string& id) {
   ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.85f, 0.45f, 0.49f, 1.0f));
-  if (ImGui::Button("Clear", { 45.0f, 40.0f })) {
+  char title[32] = "Clear ##";
+  strcat(title, id.c_str());
+  if (ImGui::Button(title, { 45.0f, 40.0f })) {
 	if (dir.second == false) {
 	  m_data.OB() << "Nothing to clear" << std::endl;
 	}
 	else {
-	  m_data.OB() << "Cleared" << std::endl;
+	  m_data.OB() << "Cleared " << id << std::endl;
 	}
 	dir.first = "None";
 	dir.second = false;
@@ -204,4 +237,20 @@ void UISystem::PrintToOutput(const std::string& message) {
 		m_data.OB().str(""); // Clear the buffer
 		m_data.OB().clear(); // Clear any error flags
     }
+}
+
+static void SeparatorWithText(const char* text) {
+  float windowWidth = ImGui::GetContentRegionAvail().x;
+  float textWidth = ImGui::CalcTextSize(text).x;
+  float halfSpace = (windowWidth - textWidth) * 0.5f;
+
+  ImGui::Spacing();
+  ImGui::Separator();
+
+  ImGui::SetCursorPosX(ImGui::GetCursorPosX() + halfSpace);
+
+  ImGui::TextUnformatted(text);
+
+  ImGui::Spacing();
+  ImGui::Separator();
 }

@@ -74,12 +74,12 @@ std::pair<std::string, bool> Data::OpenFolderDialog(std::ostringstream& os) {
   else {
 	os << "Error: " << NFD_GetError() << std::endl;
   }
-  return std::make_pair("None", true);
+  return std::make_pair("None", false);
 }
 
 std::pair<std::string, bool> Data::OpenShader(ST shader, std::ostringstream& os) {
   nfdchar_t* outPath;
-  const nfdchar_t* filters = { "vert glsl" };
+  const nfdchar_t* filters = { "vert glsl vs" };
   nfdresult_t result = NFD_OpenDialog(filters, nullptr, &outPath);
 
   if (result == NFD_OKAY) {
@@ -94,5 +94,5 @@ std::pair<std::string, bool> Data::OpenShader(ST shader, std::ostringstream& os)
   else {
 	os << "Error: " << NFD_GetError() << std::endl;
   }
-  return std::make_pair("None", true);
+  return std::make_pair("None", false);
 }

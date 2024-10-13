@@ -53,9 +53,9 @@ private:
 	void PickFolder(Dir& dir);
 
 	void ChooseFile(ST shader);
-	void PickFile(Dir& dir);
+	void PickFile(ST shader, Dir& dir);
 
-	void Clear(Dir& dir); 
+	void Clear(Dir& dir, const std::string& id); 
 	Data m_data;
 public:
 	UISystem(const UISystem& other) = delete;
