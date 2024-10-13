@@ -44,17 +44,14 @@ Dir& Data::operator[](std::size_t index) {
   return m_dir[index];
 }
 
-Dir Data::Folder()
-{
-  return Dir();
+Dir Data::Folder() {
+  return m_dir[FOLDER];
 }
 
-Dir Data::VertexShader()
-{
-  return Dir();
+Dir Data::VertexShader() {
+  return m_dir[VERT];
 }
 
-Dir Data::FragmentShader()
-{
-  return Dir();
+Dir Data::FragmentShader() {
+  return m_dir[FRAG];
 }

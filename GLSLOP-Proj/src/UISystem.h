@@ -51,8 +51,14 @@ private:
 	void Update(float dt) override;
 	void Render() const override;
 	void Exit() override;
+
 	void ChooseFolder();
-	void ChooseFile();
+	void PickFolder(Dir& dir);
+
+	void ChooseFile(ST shader);
+	void PickFile(Dir& dir);
+
+	void Clear(Dir& dir); 
 public:
 	UISystem(const UISystem& other) = delete;
 	friend class Engine;

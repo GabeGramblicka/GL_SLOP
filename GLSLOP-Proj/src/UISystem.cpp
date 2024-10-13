@@ -120,57 +120,59 @@ void UISystem::Exit() {
 }
 
 void UISystem::ChooseFolder() {
+  glm::ivec2 w = WindowSystem::WindowSize();
 
-	glm::ivec2 w = WindowSystem::WindowSize();
-	if (m_data.Folder().second == false) {
-		ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.4f, 0.45f, 0.49f, 1.0f));
-		m_data[FOLDER].first = "None";
-	}
-	else {
-		ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.1f, 0.25f, 0.62f, 1.0f));
-	}
-	if (ImGui::Button("Choose Folder", { 110.0f, 40.0f })) {
-		m_data[FOLDER] = OpenFolderDialog();
-	}
+  PickFolder(m_data[FOLDER]);
 
-	ImGui::PopStyleColor();
+  ImGui::SameLine();
+  Clear(m_data[FOLDER]);
 
-	ImGui::SameLine();
-	ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.85f, 0.45f, 0.49f, 1.0f));
-	if (ImGui::Button("Clear", { 45.0f, 40.0f })) {
-		m_data[FOLDER].first = "None";
-	}
-	ImGui::PopStyleColor();
-
-	ImGui::Text("Folder: %s", m_data[FOLDER].first.c_str());
+  ImGui::Text("Folder: %s", m_data[FOLDER].first.c_str());
 
 }
 
-void UISystem::ChooseFile() {
-  glm::ivec2 w = WindowSystem::WindowSize();
-  if (m_data[FOLDER].second == false) {
+void UISystem::PickFolder(Dir& dir) {
+  if (dir.second == false) {
 	ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.4f, 0.45f, 0.49f, 1.0f));
-	m_data[FOLDER].first = "None";
+	dir.first = "None";
   }
   else {
 	ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.1f, 0.25f, 0.62f, 1.0f));
   }
-  if (ImGui::Button("Vertex Shader", { 110.0f, 40.0f })) {
-	m_data[FOLDER] = OpenFolderDialog();
+  if (ImGui::Button("Choose Folder", { 110.0f, 40.0f })) {
+	dir = OpenFolderDialog();
   }
+  ImGui::PopStyleColor(2);
+}
 
-  ImGui::PopStyleColor();
+void UISystem::ChooseFile(ST shader) {
+  glm::ivec2 w = WindowSystem::WindowSize();
+
+  PickFolder(m_data[FOLDER]);
 
   ImGui::SameLine();
-  ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.85f, 0.45f, 0.49f, 1.0f));
-  if (ImGui::Button("Clear", { 45.0f, 40.0f })) {
-	m_data[FOLDER].first = "None";
-  }
-  ImGui::PopStyleColor();
+  Clear(m_data[FOLDER]);
 
   ImGui::Text("Folder: %s", m_data[FOLDER].first.c_str());
+}
 
-  ImGui::End();
+void UISystem::PickFile(Dir& dir) {
+}
+
+void UISystem::Clear(Dir& dir) {
+  ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.85f, 0.45f, 0.49f, 1.0f));
+  if (ImGui::Button("Clear", { 45.0f, 40.0f })) {
+	if (dir.second == false) {
+	  m_data.OB() << "Nothing to clear" << std::endl;
+	}
+	else {
+	  m_data.OB() << "Cleared" << std::endl;
+	}
+	dir.first = "None";
+	dir.second = false;
+  }
+
+  ImGui::PopStyleColor();
 }
 
 void UISystem::ConsoleOutput() {

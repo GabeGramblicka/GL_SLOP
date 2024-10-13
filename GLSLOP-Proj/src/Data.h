@@ -48,6 +48,7 @@ using ST = ShaderType;
 class Data {
 public:
   std::ostringstream& OB() { return m_outputBuffer; }
+
   Dir& operator[](std::size_t index);
   Dir Folder();
   Dir VertexShader();
