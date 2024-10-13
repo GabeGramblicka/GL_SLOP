@@ -195,6 +195,10 @@ xcopy "$(ProjectDir)inc\glew32.dll" "$(OutDir)" /s /r /y /q</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Compiler.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="inc\imGui\imgui.cpp" />
     <ClCompile Include="inc\imGui\imgui_demo.cpp" />
     <ClCompile Include="inc\imGui\imgui_draw.cpp" />
@@ -222,7 +226,6 @@ xcopy "$(ProjectDir)inc\glew32.dll" "$(OutDir)" /s /r /y /q</Command>
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">TurnOffAllWarnings</WarningLevel>
     </ClCompile>
     <ClCompile Include="src\PGE.cpp" />
-    <ClCompile Include="src\PGEFrameBuffer.cpp" />
     <ClCompile Include="src\PGEWindow.cpp" />
     <ClCompile Include="src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -236,6 +239,7 @@ xcopy "$(ProjectDir)inc\glew32.dll" "$(OutDir)" /s /r /y /q</Command>
     <ClCompile Include="src\WindowSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Compiler.h" />
     <ClInclude Include="inc\imGui\imconfig.h" />
     <ClInclude Include="inc\imGui\imgui.h" />
     <ClInclude Include="inc\imGui\imgui_impl_opengl3.h" />
@@ -249,7 +253,6 @@ xcopy "$(ProjectDir)inc\glew32.dll" "$(OutDir)" /s /r /y /q</Command>
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\nfd_common.h" />
     <ClInclude Include="src\PGE.h" />
-    <ClInclude Include="src\PGEFrameBuffer.h" />
     <ClInclude Include="src\PGEWindow.h" />
     <ClInclude Include="src\stdafx.h" />
     <ClInclude Include="src\System.h" />

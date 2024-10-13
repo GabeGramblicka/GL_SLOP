@@ -25,6 +25,12 @@
     <Filter Include="Extern\PGE">
       <UniqueIdentifier>{c12e69a8-1300-4b7d-8fb5-5fca01e9f30a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Extern\nfd">
+      <UniqueIdentifier>{a60feb2b-357f-4960-a888-fccb3ba8f358}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GL">
+      <UniqueIdentifier>{70afeed1-3c20-4ba4-a4d9-1a75aac0e010}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\System.cpp">
@@ -78,6 +84,15 @@
     <ClCompile Include="src\PGEWindow.cpp">
       <Filter>Extern\PGE</Filter>
     </ClCompile>
+    <ClCompile Include="src\nfd_common.cpp">
+      <Filter>Extern\nfd</Filter>
+    </ClCompile>
+    <ClCompile Include="src\nfd_win.cpp">
+      <Filter>Extern\nfd</Filter>
+    </ClCompile>
+    <ClCompile Include="Compiler.cpp">
+      <Filter>GL</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\System.h">
@@ -98,7 +113,6 @@
     <ClInclude Include="src\UISystem.h">
       <Filter>Systems\UI</Filter>
     </ClInclude>
-    <ClInclude Include="inc\imGui\imconfig.h" />
     <ClInclude Include="inc\imGui\imgui.h">
       <Filter>Extern\ImGui</Filter>
     </ClInclude>
@@ -131,6 +145,15 @@
     </ClInclude>
     <ClInclude Include="src\PGEWindow.h">
       <Filter>Extern\PGE</Filter>
+    </ClInclude>
+    <ClInclude Include="src\nfd_common.h">
+      <Filter>Extern\nfd</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\imGui\imconfig.h">
+      <Filter>Extern\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Compiler.h">
+      <Filter>GL</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
