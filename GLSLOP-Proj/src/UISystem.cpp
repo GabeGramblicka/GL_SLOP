@@ -35,7 +35,6 @@ UISystem UISystem::s_instance = UISystem();
 //------------------------------------------------------------------------------
 
 static bool s_showDemoWindow = true;
-static std::pair<std::string, bool> s_currFolder = std::make_pair("None", false);
 
 //------------------------------------------------------------------------------
 // Private Function Declarations:
@@ -93,8 +92,10 @@ void UISystem::Update(float dt) {
 	ImGui::DockSpace(ImGui::GetID("Dockspace"));
 	ImGui::SetWindowSize(ImVec2(wSize.x, wSize.y));
 
+	ImGui::Begin("Choose Folder");
 	ChooseFolder();
 	ConsoleOutput();
+	ImGui::End();
 
 	ImGui::End();
 }
@@ -119,18 +120,17 @@ void UISystem::Exit() {
 }
 
 void UISystem::ChooseFolder() {
-	ImGui::Begin("Choose Folder");
 
 	glm::ivec2 w = WindowSystem::WindowSize();
-	if (s_currFolder.second == false) {
+	if (m_data.Folder().second == false) {
 		ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.4f, 0.45f, 0.49f, 1.0f));
-		s_currFolder.first = "None";
+		m_data[FOLDER].first = "None";
 	}
 	else {
 		ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.1f, 0.25f, 0.62f, 1.0f));
 	}
 	if (ImGui::Button("Choose Folder", { 110.0f, 40.0f })) {
-		s_currFolder = OpenFolderDialog();
+		m_data[FOLDER] = OpenFolderDialog();
 	}
 
 	ImGui::PopStyleColor();
@@ -138,13 +138,39 @@ void UISystem::ChooseFolder() {
 	ImGui::SameLine();
 	ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.85f, 0.45f, 0.49f, 1.0f));
 	if (ImGui::Button("Clear", { 45.0f, 40.0f })) {
-		s_currFolder.first = "None";
+		m_data[FOLDER].first = "None";
 	}
 	ImGui::PopStyleColor();
 
-	ImGui::Text("Folder: %s", s_currFolder.first.c_str());
+	ImGui::Text("Folder: %s", m_data[FOLDER].first.c_str());
 
-	ImGui::End();
+}
+
+void UISystem::ChooseFile() {
+  glm::ivec2 w = WindowSystem::WindowSize();
+  if (m_data[FOLDER].second == false) {
+	ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.4f, 0.45f, 0.49f, 1.0f));
+	m_data[FOLDER].first = "None";
+  }
+  else {
+	ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.1f, 0.25f, 0.62f, 1.0f));
+  }
+  if (ImGui::Button("Vertex Shader", { 110.0f, 40.0f })) {
+	m_data[FOLDER] = OpenFolderDialog();
+  }
+
+  ImGui::PopStyleColor();
+
+  ImGui::SameLine();
+  ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.85f, 0.45f, 0.49f, 1.0f));
+  if (ImGui::Button("Clear", { 45.0f, 40.0f })) {
+	m_data[FOLDER].first = "None";
+  }
+  ImGui::PopStyleColor();
+
+  ImGui::Text("Folder: %s", m_data[FOLDER].first.c_str());
+
+  ImGui::End();
 }
 
 void UISystem::ConsoleOutput() {
@@ -156,7 +182,7 @@ void UISystem::ConsoleOutput() {
 
 	// Create a scrollable area
 	ImGui::BeginChild("OutputChild", ImVec2(0, 300), true); // 300 pixels height, scrollable
-	ImGui::Text("%s", m_outputBuffer.str().c_str());
+	ImGui::Text("%s", m_data.OB().str().c_str());
 
 	// Scroll to bottom if autoScroll is enabled
 	if (true) {
@@ -171,29 +197,48 @@ void UISystem::ConsoleOutput() {
 
 std::pair<std::string, bool> UISystem::OpenFolderDialog() {
 	nfdchar_t* outPath = nullptr;
-	nfdresult_t result = NFD_PickFolder(NULL, &outPath);
+	nfdresult_t result = NFD_PickFolder(nullptr, &outPath);
 
 	if (result == NFD_OKAY) {
-		m_outputBuffer << "Selected folder: " << outPath << std::endl;
+		m_data.OB() << "Selected folder: " << outPath << std::endl;
 		std::string folder(outPath);
 		free(outPath); // Don't forget to free the allocated string
 		return std::make_pair(folder, true);
 	}
 	else if (result == NFD_CANCEL) {
-		m_outputBuffer << "User canceled." << std::endl;
+	  m_data.OB() << "User canceled." << std::endl;
 	}
 	else {
-		m_outputBuffer << "Error: " << NFD_GetError() << std::endl;
+	  m_data.OB() << "Error: " << NFD_GetError() << std::endl;
 	}
 	return std::make_pair("None", true);
 }
 
+std::pair<std::string, bool> UISystem::OpenShader(ST shader) {
+  nfdchar_t* outPath;
+  const nfdchar_t* filters = {"vert glsl"};
+  nfdresult_t result = NFD_OpenDialog(filters, nullptr, &outPath);
+
+  if (result == NFD_OKAY) {
+	std::string file(outPath);
+	free(outPath);
+	return std::make_pair(file, true);
+  }
+  else if (result == NFD_CANCEL) {
+	puts("User pressed cancel.");
+  }
+  else {
+	printf("Error: %s\n", NFD_GetError());
+  }
+  return std::make_pair("None", true);
+}
+
 void UISystem::PrintToOutput(const std::string& message) {
-    m_outputBuffer << message << std::endl;
+	m_data.OB() << message << std::endl;
 
     // Limit the number of lines in the output
-    if (std::count(m_outputBuffer.str().begin(), m_outputBuffer.str().end(), '\n') > 100) {
-		m_outputBuffer.str(""); // Clear the buffer
-		m_outputBuffer.clear(); // Clear any error flags
+    if (std::count(m_data.OB().str().begin(), m_data.OB().str().end(), '\n') > 100) {
+		m_data.OB().str(""); // Clear the buffer
+		m_data.OB().clear(); // Clear any error flags
     }
 }

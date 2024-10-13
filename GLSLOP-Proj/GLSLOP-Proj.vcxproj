@@ -195,10 +195,6 @@ xcopy "$(ProjectDir)inc\glew32.dll" "$(OutDir)" /s /r /y /q</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Compiler.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="inc\imGui\imgui.cpp" />
     <ClCompile Include="inc\imGui\imgui_demo.cpp" />
     <ClCompile Include="inc\imGui\imgui_draw.cpp" />
@@ -216,6 +212,8 @@ xcopy "$(ProjectDir)inc\glew32.dll" "$(OutDir)" /s /r /y /q</Command>
     <ClCompile Include="inc\imGui\imgui_stdlib.cpp" />
     <ClCompile Include="inc\imGui\imgui_tables.cpp" />
     <ClCompile Include="inc\imGui\imgui_widgets.cpp" />
+    <ClCompile Include="src\Compiler.cpp" />
+    <ClCompile Include="src\Data.cpp" />
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\nfd_common.cpp" />
@@ -239,7 +237,6 @@ xcopy "$(ProjectDir)inc\glew32.dll" "$(OutDir)" /s /r /y /q</Command>
     <ClCompile Include="src\WindowSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Compiler.h" />
     <ClInclude Include="inc\imGui\imconfig.h" />
     <ClInclude Include="inc\imGui\imgui.h" />
     <ClInclude Include="inc\imGui\imgui_impl_opengl3.h" />
@@ -250,6 +247,8 @@ xcopy "$(ProjectDir)inc\glew32.dll" "$(OutDir)" /s /r /y /q</Command>
     <ClInclude Include="inc\imGui\imstb_rectpack.h" />
     <ClInclude Include="inc\imGui\imstb_textedit.h" />
     <ClInclude Include="inc\imGui\imstb_truetype.h" />
+    <ClInclude Include="src\Compiler.h" />
+    <ClInclude Include="src\Data.h" />
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\nfd_common.h" />
     <ClInclude Include="src\PGE.h" />

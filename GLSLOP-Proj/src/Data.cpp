@@ -1,6 +1,6 @@
 ﻿//------------------------------------------------------------------------------
 //
-// File Name:	UISystem.h
+// File Name:	Data.cpp
 // Author(s):	Gabe Gramblicka (gabriel.gramblicka)
 // Project:		GL SLOP
 //
@@ -8,60 +8,53 @@
 //
 //------------------------------------------------------------------------------
 
-#pragma once
-
 //------------------------------------------------------------------------------
 // Include Files:
 //------------------------------------------------------------------------------
 
-#include "System.h" // Inherit
-
-#include <ImGui\imgui_impl_opengl3.h> // Platform
-#include <ImGui\imgui_impl_sdl2.h>	  // Renderer
-
+#include "stdafx.h"
 #include "Data.h"
 
+#include <sstream>
 //------------------------------------------------------------------------------
-// Forward References:
+// Private Classes:
 //------------------------------------------------------------------------------
-
-//------------------------------------------------------------------------------
-// Public Constants:
-//------------------------------------------------------------------------------
-
-//------------------------------------------------------------------------------
-// Classes:
-//------------------------------------------------------------------------------
-
-class UISystem : public System {
-public:
-	static System& Instance();
-	static void ProcessEvents(SDL_Event* event);
-	void PrintToOutput(const std::string& message);
-	std::pair<std::string, bool> OpenFolderDialog();
-	std::pair<std::string, bool> OpenShader(ST shader);
-	Data m_data;
-
-private:
-	static UISystem s_instance;
-	void ConsoleOutput();
-
-	UISystem();
-	bool Init() override;
-	void Update(float dt) override;
-	void Render() const override;
-	void Exit() override;
-	void ChooseFolder();
-	void ChooseFile();
-public:
-	UISystem(const UISystem& other) = delete;
-	friend class Engine;
-};
 
 //------------------------------------------------------------------------------
 // Public Variables:
 //------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
+// Private Variables:
+//------------------------------------------------------------------------------
+
+//------------------------------------------------------------------------------
+// Private Function Declarations:
+//------------------------------------------------------------------------------
+
+//------------------------------------------------------------------------------
 // Public Functions:
 //------------------------------------------------------------------------------
+
+//------------------------------------------------------------------------------
+// Private Functions:
+//------------------------------------------------------------------------------
+
+Dir& Data::operator[](std::size_t index) {
+  return m_dir[index];
+}
+
+Dir Data::Folder()
+{
+  return Dir();
+}
+
+Dir Data::VertexShader()
+{
+  return Dir();
+}
+
+Dir Data::FragmentShader()
+{
+  return Dir();
+}
