@@ -41,12 +41,13 @@
 // Private Functions:
 //------------------------------------------------------------------------------
 
-Compiler::Compiler(Dir virtDir, Dir fragDir)
+Compiler::Compiler(Dir fragDir, Dir virtDir)
 : m_program(0) {
+  GLint value;
 
   Data::OB() << "Reading fragment file..." << std::endl;
   GLuint& program = m_program;
-  std::ifstream fragmentShaderFile(virtDir.first.c_str());
+  std::ifstream fragmentShaderFile(fragDir.first.c_str());
   std::stringstream fragmentShaderData;
   fragmentShaderData << fragmentShaderFile.rdbuf();
   fragmentShaderFile.close();
@@ -57,7 +58,16 @@ Compiler::Compiler(Dir virtDir, Dir fragDir)
   GLuint frag = glCreateShader(GL_FRAGMENT_SHADER);
   glShaderSource(frag, 1, &shaderText, &textLength);
   glCompileShader(frag);
-  Data::OB() << "Fragment shader compiled successfully" << std::endl;
+  glGetShaderiv(frag, GL_COMPILE_STATUS, &value);
+  if (!value) {
+    char buffer[1024];
+    glGetShaderInfoLog(frag, 1024, 0, buffer);
+    Data::OB() << "Fragment shader could not compile:" << std::endl;
+    Data::OB() << buffer << std::endl;
+  }
+  else {
+    Data::OB() << "Fragment shader compiled successfully" << std::endl;
+  }
 
   Data::OB() << "Reading vertex file..." << std::endl;
   std::ifstream vertexShaderFile(virtDir.first.c_str()); 
@@ -71,7 +81,16 @@ Compiler::Compiler(Dir virtDir, Dir fragDir)
   GLuint virt = glCreateShader(GL_VERTEX_SHADER);
   glShaderSource(virt, 1, &shaderText, &textLength);
   glCompileShader(virt);
-  Data::OB() << "Vertex shader compiled successfully" << std::endl;
+  glGetShaderiv(virt, GL_COMPILE_STATUS, &value);
+  if (!value) {
+    char buffer[1024];
+    glGetShaderInfoLog(virt, 1024, 0, buffer);
+    Data::OB() << "Vertex shader could not compile:" << std::endl;
+    Data::OB() << buffer << std::endl;
+  }
+  else {
+    Data::OB() << "Vertex shader compiled successfully" << std::endl;
+  }
 
   // link shader program
   Data::OB() << "Linking shaders..." << std::endl;
@@ -79,8 +98,16 @@ Compiler::Compiler(Dir virtDir, Dir fragDir)
   glAttachShader(program, frag);
   glAttachShader(program, virt);
   glLinkProgram(program);
-  glUseProgram(program);
-  Data::OB() << "Shaders linked successfully" << std::endl;
+  glGetProgramiv(program, GL_LINK_STATUS, &value);
+  if (!value) {
+    Data::OB() << "shader program failed to link" << std::endl;
+    char buffer[1024];
+    glGetProgramInfoLog(program, 1024, 0, buffer);
+    Data::OB() << buffer << std::endl;
+  }
+  else {
+    Data::OB() << "Shaders linked successfully" << std::endl;
+  }
 }
 
 Compiler::~Compiler() {
