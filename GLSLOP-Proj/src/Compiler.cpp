@@ -57,6 +57,7 @@ Compiler::Compiler(Dir fragDir, Dir virtDir)
   Data::OB() << "Compiling fragment shader..." << std::endl;
   GLuint frag = glCreateShader(GL_FRAGMENT_SHADER);
   glShaderSource(frag, 1, &shaderText, &textLength);
+  // glSlopParse(frag);
   glCompileShader(frag);
   glGetShaderiv(frag, GL_COMPILE_STATUS, &value);
   if (!value) {
@@ -80,6 +81,7 @@ Compiler::Compiler(Dir fragDir, Dir virtDir)
   Data::OB() << "Compiling fragment shader..." << std::endl;
   GLuint virt = glCreateShader(GL_VERTEX_SHADER);
   glShaderSource(virt, 1, &shaderText, &textLength);
+  // glSlopParse(virt);
   glCompileShader(virt);
   glGetShaderiv(virt, GL_COMPILE_STATUS, &value);
   if (!value) {

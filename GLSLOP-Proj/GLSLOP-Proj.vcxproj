@@ -223,6 +223,7 @@ xcopy "$(ProjectDir)inc\glew32.dll" "$(OutDir)" /s /r /y /q</Command>
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">TurnOffAllWarnings</WarningLevel>
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">TurnOffAllWarnings</WarningLevel>
     </ClCompile>
+    <ClCompile Include="src\Parser.c" />
     <ClCompile Include="src\PGE.cpp" />
     <ClCompile Include="src\PGEWindow.cpp" />
     <ClCompile Include="src\stdafx.cpp">
@@ -251,6 +252,7 @@ xcopy "$(ProjectDir)inc\glew32.dll" "$(OutDir)" /s /r /y /q</Command>
     <ClInclude Include="src\Data.h" />
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\nfd_common.h" />
+    <ClInclude Include="src\Parser.h" />
     <ClInclude Include="src\PGE.h" />
     <ClInclude Include="src\PGEWindow.h" />
     <ClInclude Include="src\stdafx.h" />

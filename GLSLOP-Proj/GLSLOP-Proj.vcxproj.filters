@@ -96,6 +96,9 @@
     <ClCompile Include="src\Data.cpp">
       <Filter>GL</Filter>
     </ClCompile>
+    <ClCompile Include="src\Parser.c">
+      <Filter>GL</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\System.h">
@@ -159,6 +162,9 @@
       <Filter>GL</Filter>
     </ClInclude>
     <ClInclude Include="src\Data.h">
+      <Filter>GL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Parser.h">
       <Filter>GL</Filter>
     </ClInclude>
   </ItemGroup>
