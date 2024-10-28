@@ -78,6 +78,8 @@ bool UISystem::Init() {
 	ImGui_ImplSDL2_InitForOpenGL(WindowSystem::Window(), WindowSystem::Context());
 	ImGui_ImplOpenGL3_Init(glsl_version);
 
+	m_data.ReadData();
+
 	return true;
 }
 
@@ -132,9 +134,10 @@ void UISystem::Render() const {
 }
 
 void UISystem::Exit() {
-	ImGui_ImplOpenGL3_Shutdown();
-	ImGui_ImplSDL2_Shutdown();
-	ImGui::DestroyContext();
+  m_data.SaveData();
+  ImGui_ImplOpenGL3_Shutdown();
+  ImGui_ImplSDL2_Shutdown();
+  ImGui::DestroyContext();
 }
 
 bool UISystem::ChooseFolder() {

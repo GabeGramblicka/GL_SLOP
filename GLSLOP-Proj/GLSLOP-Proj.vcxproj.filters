@@ -96,7 +96,7 @@
     <ClCompile Include="src\Data.cpp">
       <Filter>GL</Filter>
     </ClCompile>
-    <ClCompile Include="src\Parser.c">
+    <ClCompile Include="src\Parser.cpp">
       <Filter>GL</Filter>
     </ClCompile>
   </ItemGroup>

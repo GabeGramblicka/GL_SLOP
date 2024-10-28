@@ -14,6 +14,9 @@
 
 #include "stdafx.h"
 #include "Parser.h"
+#include "Data.h"
+
+#include <stdio.h>
 
 //------------------------------------------------------------------------------
 // Private Classes:
@@ -38,4 +41,28 @@
 //------------------------------------------------------------------------------
 // Private Functions:
 //------------------------------------------------------------------------------
+
+const char* glSlopParse(const char* shaderText) {
+  const char* includeString = "#include";
+  size_t iSize = strlen(includeString) /* 8 */; // include length
+
+  const char* includeFile = nullptr;
+  const char* newFile = nullptr;
+
+  size_t oSize = strlen(shaderText);
+  for (int i = 0; i < oSize; ++i) {
+    Data::OB() << shaderText[i];
+
+    for (int j = 0; j < iSize; ++j) {
+      if (shaderText[i] != includeString[j]) {
+        break;
+      }
+      if (j == iSize) {
+        Data::OB() << "Found include" << std::endl;
+      }
+    }
+  }
+
+  return newFile;
+}
 

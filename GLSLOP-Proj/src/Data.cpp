@@ -58,6 +58,38 @@ Dir Data::FragmentShader() {
   return m_dir[FRAG];
 }
 
+void Data::ReadData() {
+  std::ifstream file("files.dat");
+  std::array<std::string, 3> text;
+
+  int i = 0;
+  while (i < 3 && getline(file, text[i])) {
+	m_dir[i].first = text[i];
+	if (text[i] == "" || text[i] == "None") {
+	  m_dir[i].second = false;
+	}
+	else {
+	  m_dir[i].second = true;
+	}
+	++i;
+  }
+
+  // Close the file
+  file.close();
+}
+
+void Data::SaveData() {
+  std::ofstream file("files.dat");
+
+  // Write to the file
+  file << m_dir[FOLDER].first << std::endl;
+  file << m_dir[VERT].first << std::endl;
+  file << m_dir[FRAG].first << std::endl;
+
+  // Close the file
+  file.close();
+}
+
 std::pair<std::string, bool> Data::OpenFolderDialog(std::ostringstream& os) {
   nfdchar_t* outPath = nullptr;
   nfdresult_t result = NFD_PickFolder(nullptr, &outPath);

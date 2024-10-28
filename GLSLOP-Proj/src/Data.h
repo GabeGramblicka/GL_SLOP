@@ -53,6 +53,8 @@ public:
   Dir Folder();
   Dir VertexShader();
   Dir FragmentShader();
+  void ReadData();
+  void SaveData();
   static std::pair<std::string, bool> OpenFolderDialog(std::ostringstream& os);
   static std::pair<std::string, bool> OpenShader(ST shader, std::ostringstream& os);
 private:

@@ -16,6 +16,7 @@
 #include "Compiler.h"
 
 #include "Data.h"
+#include "Parser.h"
 
 //------------------------------------------------------------------------------
 // Private Classes:
@@ -57,7 +58,7 @@ Compiler::Compiler(Dir fragDir, Dir virtDir)
   Data::OB() << "Compiling fragment shader..." << std::endl;
   GLuint frag = glCreateShader(GL_FRAGMENT_SHADER);
   glShaderSource(frag, 1, &shaderText, &textLength);
-  // glSlopParse(frag);
+  glSlopParse(shaderText);
   glCompileShader(frag);
   glGetShaderiv(frag, GL_COMPILE_STATUS, &value);
   if (!value) {
