@@ -55,7 +55,11 @@ const char* glSlopParse(const char* shaderText) {
 
     for (int j = 0; j < iSize; ++j) {
       if (shaderText[i] != includeString[j]) {
+        j = 0; // reset
         break;
+      }
+      else {
+        ++i;
       }
       if (j == iSize) {
         Data::OB() << "Found include" << std::endl;
