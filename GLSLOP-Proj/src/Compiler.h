@@ -17,7 +17,7 @@
 
 class Compiler {
 public:
-  Compiler(Dir fragDir, Dir virtDir);
+  Compiler(Dir fragDir, Dir virtDir, const char* root);
   ~Compiler();
 private:
   GLuint m_program;

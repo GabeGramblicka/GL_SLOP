@@ -42,7 +42,7 @@
 // Private Functions:
 //------------------------------------------------------------------------------
 
-Compiler::Compiler(Dir fragDir, Dir virtDir)
+Compiler::Compiler(Dir fragDir, Dir virtDir, const char* root)
 : m_program(0) {
   GLint value;
 
@@ -58,7 +58,7 @@ Compiler::Compiler(Dir fragDir, Dir virtDir)
   Data::OB() << "Compiling fragment shader..." << std::endl;
   GLuint frag = glCreateShader(GL_FRAGMENT_SHADER);
   glShaderSource(frag, 1, &shaderText, &textLength);
-  glSlopParse(shaderText);
+  glSlopParse(shaderText, root);
   glCompileShader(frag);
   glGetShaderiv(frag, GL_COMPILE_STATUS, &value);
   if (!value) {

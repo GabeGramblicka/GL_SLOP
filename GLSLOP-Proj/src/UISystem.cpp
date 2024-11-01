@@ -209,7 +209,7 @@ void UISystem::PickFile(ST shader, Dir& dir) {
 
 void UISystem::Compile() {
   if (ImGui::Button("Compile Shaders", { 150.0f, 40.0f })) {
-	Compiler* o = new Compiler(m_data[FRAG], m_data[VERT]);
+	Compiler* o = new Compiler(m_data[FRAG], m_data[VERT], m_data[FOLDER].first.c_str());
   }
 }
 

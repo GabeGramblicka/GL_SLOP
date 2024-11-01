@@ -42,6 +42,15 @@
 // Private Functions:
 //------------------------------------------------------------------------------
 
+std::string GetNewFile(const char* path) {
+  std::ifstream includeFile(path);
+  std::stringstream includeData;
+  includeData << includeFile.rdbuf();
+  includeFile.close();
+
+  return includeData.str();
+}
+
 std::string GetPath(const char* shaderText, size_t begin, size_t& end) {
   std::string sText = shaderText;
   size_t c = 0;
@@ -56,12 +65,12 @@ std::string GetPath(const char* shaderText, size_t begin, size_t& end) {
     }
   }
 
-  end = quotes[1] - quotes[0];
-  std::string path = sText.substr(quotes[0] + 1, end - 1);
+  end = quotes[1];
+  std::string path = sText.substr(quotes[0] + 1, end - quotes[0] - 1);
   return path;
 }
 
-const char* glSlopParse(const char* shaderText) {
+const char* glSlopParse(const char* shaderText, const char* includeShaderPath) {
   const char* includeString = "#include";
   size_t iSize = strlen(includeString) /* 8 */; // include length
 
@@ -76,13 +85,22 @@ const char* glSlopParse(const char* shaderText) {
 
     for (int j = 0; j < iSize; ++j) {
       if (j == iSize - 1) {
-
-        // Get substrings
-        std::string s1 = sText.substr(0, beginFind);
-
         std::cout << "Found include" << std::endl;
         size_t end;
         path = GetPath(shaderText, beginFind, end);
+
+        // Get substrings
+        std::string s1 = sText.substr(0, beginFind);
+        std::string s2 = sText.substr(end);
+
+        // Find the file
+        std::string root = includeShaderPath + path;
+        std::string inc = GetNewFile(root.c_str());
+
+        // Combine files
+        std::string final = s1 + inc + s2;
+        return final.c_str();
+
       }
       if (shaderText[i] != includeString[j]) {
         j = 0; // reset
