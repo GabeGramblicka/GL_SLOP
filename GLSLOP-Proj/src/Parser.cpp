@@ -42,26 +42,31 @@
 // Private Functions:
 //------------------------------------------------------------------------------
 
-const char* GetPath(const char* shaderText, size_t begin, size_t end, size_t size) {
-  char* s1 = (char*)calloc(1, begin);
-  char* s2 = (char*)calloc(1, size - end);
-  for (size_t i = 0; i < begin; ++i) {
-    s1[i] = shaderText[i];
+std::string GetPath(const char* shaderText, size_t begin, size_t& end) {
+  std::string sText = shaderText;
+  size_t c = 0;
+  const size_t quoteCount = 2;
+  int quotes[2] = { 0 };
+
+  int i; 
+  for (i = 0; c < quoteCount; ++i) {
+    if (sText[begin + i] == '"') {
+      quotes[c] = begin + i;
+      c++;
+    }
   }
 
-  for (size_t i = end; i < size; ++i) {
-    s2[i] = shaderText[i];
-  }
-
-  return nullptr;
+  end = quotes[1] - quotes[0];
+  std::string path = sText.substr(quotes[0] + 1, end - 1);
+  return path;
 }
 
 const char* glSlopParse(const char* shaderText) {
   const char* includeString = "#include";
   size_t iSize = strlen(includeString) /* 8 */; // include length
 
-  const char* includeFile = nullptr;
-  const char* newFile = nullptr;
+  std::string sText = shaderText;
+  std::string path;
 
   size_t oSize = strlen(shaderText);
   for (int i = 0; i < oSize; ++i) {
@@ -71,8 +76,13 @@ const char* glSlopParse(const char* shaderText) {
 
     for (int j = 0; j < iSize; ++j) {
       if (j == iSize - 1) {
+
+        // Get substrings
+        std::string s1 = sText.substr(0, beginFind);
+
         std::cout << "Found include" << std::endl;
-        const char* path = GetPath(shaderText, beginFind, i, oSize);
+        size_t end;
+        path = GetPath(shaderText, beginFind, end);
       }
       if (shaderText[i] != includeString[j]) {
         j = 0; // reset
@@ -84,8 +94,7 @@ const char* glSlopParse(const char* shaderText) {
       }
     }
   }
-
-  return newFile;
+  return nullptr;
 }
 
 
