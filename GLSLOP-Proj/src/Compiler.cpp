@@ -58,7 +58,7 @@ Compiler::Compiler(Dir fragDir, Dir virtDir, const char* root)
   Data::OB() << "Compiling fragment shader..." << std::endl;
   GLuint frag = glCreateShader(GL_FRAGMENT_SHADER);
   glShaderSource(frag, 1, &shaderText, &textLength);
-  glSlopParse(shaderText, root);
+  glSlopParse(&shaderText, root);
   glCompileShader(frag);
   glGetShaderiv(frag, GL_COMPILE_STATUS, &value);
   if (!value) {

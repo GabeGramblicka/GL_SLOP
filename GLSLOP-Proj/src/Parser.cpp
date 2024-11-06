@@ -70,16 +70,16 @@ std::string GetPath(const char* shaderText, size_t begin, size_t& end) {
   return path;
 }
 
-const char* glSlopParse(const char* shaderText, const char* includeShaderPath) {
+void glSlopParse(const char** shaderText, const char* includeShaderPath) {
   const char* includeString = "#include";
   size_t iSize = strlen(includeString) /* 8 */; // include length
 
-  std::string sText = shaderText;
+  std::string sText = *shaderText;
   std::string path;
 
-  size_t oSize = strlen(shaderText);
+  size_t oSize = strlen(*shaderText);
   for (int i = 0; i < oSize; ++i) {
-    Data::OB() << shaderText[i];
+    Data::OB() << (*shaderText)[i];
 
     size_t beginFind = i;
 
@@ -87,7 +87,7 @@ const char* glSlopParse(const char* shaderText, const char* includeShaderPath) {
       if (j == iSize - 1) {
         std::cout << "Found include" << std::endl;
         size_t end;
-        path = GetPath(shaderText, beginFind, end);
+        path = GetPath(*shaderText, beginFind, end);
 
         // Get substrings
         std::string s1 = sText.substr(0, beginFind);
@@ -99,20 +99,21 @@ const char* glSlopParse(const char* shaderText, const char* includeShaderPath) {
 
         // Combine files
         std::string final = s1 + inc + s2;
-        return final.c_str();
+        *shaderText = final.c_str();
+
+        return;
 
       }
-      if (shaderText[i] != includeString[j]) {
+      if ((*shaderText)[i] != includeString[j]) {
         j = 0; // reset
         break;
       }
       else {
-        Data::OB() << shaderText[i];
+        Data::OB() << (*shaderText)[i];
         ++i;
       }
     }
   }
-  return nullptr;
 }
 
 

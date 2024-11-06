@@ -34,4 +34,4 @@
 // Public Functions:
 //------------------------------------------------------------------------------
 
-const char* glSlopParse(const char* shaderText, const char* rootPath);
+void glSlopParse(const char** shaderText, const char* rootPath);
